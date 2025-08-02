@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/thumbs';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen flex flex-col scroll-smooth bg-gradient-to-b from-[#002c3f] to-[#00141f] text-white">
+      {/* Main content grows to fill space */}
+      <main className="flex-grow">
+        <Home />
+      </main>
+
+      {/* Footer stays at the bottom */}
+      <Footer />
     </div>
   );
 }
