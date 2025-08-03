@@ -45,7 +45,7 @@ const FAQ = () => {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="border border-gray-700 rounded-xl overflow-hidden bg-gray-900"
+            className="border border-gray-700 rounded-xl overflow-hidden "
           >
             <button
               onClick={() => toggleFAQ(index)}
@@ -57,7 +57,7 @@ const FAQ = () => {
               </span>
             </button>
             {activeIndex === index && (
-              <div className="px-6 pb-6 text-gray-300 text-base md:text-lg leading-relaxed">
+              <div className="px-6 pb-6 text-gray-300 text-base md:text-lg leading-relaxed transition-all duration-300">
                 {faq.answer}
               </div>
             )}

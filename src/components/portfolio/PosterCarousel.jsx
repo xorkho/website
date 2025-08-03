@@ -26,15 +26,20 @@ export default function PosterCarousel() {
 
   return (
     <div className="w-full max-w-7xl mx-auto mt-24 mb-15 py-16 px-4 relative">
-      <h2 className="text-5xl md:text-5xl font-bold mb-10 text-center text-[#f4b018]">
-        CREATIVE POSTER DESIGN
+      <h2 className="text-3xl md:text-5xl font-extrabold  uppercase mb-10 text-center  text-[#f4b018]">
+        Creative Poster Design
       </h2>
 
       <Swiper
         spaceBetween={15}
-        slidesPerView={2.3}
         navigation
         modules={[Navigation]}
+        breakpoints={{
+          0: { slidesPerView: 1.1 },
+          480: { slidesPerView: 1.5 },
+          768: { slidesPerView: 2.3 },
+          1024: { slidesPerView: 3 },
+        }}
         className="rounded-3xl"
       >
         {posters.map((poster) => (
@@ -47,7 +52,6 @@ export default function PosterCarousel() {
                     ? "scale-100 blur-0 z-10"
                     : "scale-90 blur-sm opacity-40"
                   : "hover:scale-110 hover:shadow-yellow-500"
-
               }`}
             >
               <div className="w-full aspect-[5/4] max-h-[400px]">
@@ -80,4 +84,3 @@ export default function PosterCarousel() {
     </div>
   );
 }
-

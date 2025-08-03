@@ -103,7 +103,7 @@ function VideoModal({ isOpen, onClose, videoSrc, modalVideoRef }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] aspect-[9/16] ...">
+      <div className="relative w-full max-w-[90vw] sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px]">
         <video
           ref={modalVideoRef}
           src={videoSrc}
@@ -180,7 +180,8 @@ export default function CarouselVideo() {
         {videos.map((video, index) => (
           <SwiperSlide
             key={index}
-            className="!w-[250px] sm:!w-[280px] md:!w-[320px] xl:!w-[360px] flex justify-center"
+            className="!w-[250px] sm:!w-[280px] md:!w-[320px] xl:!w-[360px]"
+
           >
             <Reel
               src={video.src}

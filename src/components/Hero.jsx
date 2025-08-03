@@ -8,7 +8,8 @@ const Hero = () => {
     >
       {/* Headline Text */}
       <div className="text-center mt-10 relative">
-        <h2 className="text-4xl md:text-6=4xl font-semibold tracking-wide text-white leading-tight inline-block Capitalize">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-wide text-white leading-tight">
+
           Where Creativity{" "}
           <span className="relative inline-block text-[#f4b018]">
             Meets Results
@@ -32,30 +33,29 @@ const Hero = () => {
 
       {/* Video */}
       <video
-        className="w-[95%] md:w-[1100px] rounded-3xl shadow-lg mb-12 mt-10"
+        className="w-full max-w-[1100px] rounded-3xl shadow-lg mb-12 mt-10"
         src="/intro.mp4"
         controls
       />
 
       {/* Stats Section */}
-      {/* Stats Section */}
-      <div className="bg-white text-[#002c3f] backdrop-blur-sm p-4 rounded-full shadow-md hover:scale-[1.02] transition-transform w-full max-w-4xl mx-auto">
+<div className="bg-white text-[#002c3f] backdrop-blur-sm p-4 rounded-full shadow-md hover:scale-[1.02] transition-transform w-full max-w-4xl mx-auto">
         <div className="grid grid-cols-3 gap-2 text-center">
           <div>
             <h3 className="text-3xl md:text-4xl font-bold mb-1">100+</h3>
-            <p className="text-sm md:text-base font-extrabold">
+            <p className="text-xsm md:text-base font-semibold">
               Completed Projects
             </p>
           </div>
           <div>
             <h3 className="text-3xl md:text-4xl font-bold mb-1">50+</h3>
-            <p className="text-sm md:text-base font-extrabold">
+            <p className="text-xsm md:text-base font-semibold">
               Active Clients
             </p>
           </div>
           <div>
             <h3 className="text-3xl md:text-4xl font-bold mb-1">100%</h3>
-            <p className="text-sm md:text-base font-extrabold">
+            <p className="text-sm md:text-base font-semibold">
               Satisfaction Rate
             </p>
           </div>

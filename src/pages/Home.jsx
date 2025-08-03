@@ -12,7 +12,7 @@ import WhatsAppButton from "../components/WhatsAppButton";
 
 const Home = () => {
   return (
-    <div className="pt-7">
+    <div >
       <Navbar/>
       <Hero />
       <Portfolio />
