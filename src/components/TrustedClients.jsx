@@ -13,8 +13,8 @@ const TrustedClients = () => {
 
   return (
     <section className="py-20  text-white text-center px-4">
-  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest uppercase text-[#f4b018] mb-10">
-        Creative 🤝 Partners
+  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-widest capitalize text-[#ffffff] mb-10">
+        Creative Partners
       </h2>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-px border border-gray-700 max-w-4xl mx-auto overflow-hidden">

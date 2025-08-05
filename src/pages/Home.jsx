@@ -4,9 +4,9 @@ import Navbar from "../components/Navbar";
 import TrustedClients from "../components/TrustedClients";
 import FAQ from "../components/Faq";
 import Contact  from "../components/Contact";
-import About  from "../components/About";
 // import Footer from "../components/Footer";
 import Service from "../components/Service";
+import ClientReview from "../components/ClientReview";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 
@@ -18,7 +18,7 @@ const Home = () => {
       <Portfolio />
       <TrustedClients/>
       <Service/>
-      <About />
+      <ClientReview />   
       <FAQ/>
       <Contact/>
       <WhatsAppButton />

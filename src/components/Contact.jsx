@@ -1,41 +1,90 @@
-import React from "react";
+import React, { useRef } from "react";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    // Send confirmation to client
+    emailjs
+      .sendForm("service_i89a2mq", "template_etb7rge", form.current, "vM14qq7vHlfiGeat8")
+      .then((result) => {
+        console.log("Client confirmation sent:", result.text);
+      })
+      .catch((error) => {
+        console.log("Client email error:", error);
+      });
+
+    // Send details to owner
+    emailjs
+      .sendForm("service_i89a2mq", "template_1hobgec", form.current, "vM14qq7vHlfiGeat8")
+      .then((result) => {
+        console.log("Owner notification sent:", result.text);
+        alert("Message sent successfully!");
+        form.current.reset();
+      })
+      .catch((error) => {
+        console.log("Owner email error:", error);
+        alert("Something went wrong. Please try again.");
+      });
+  };
+
   return (
-    <section id="contact" className="py-12 px-4 text-white bg-transparent">
-      <div className="max-w-5xl mx-auto w-full">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 text-center uppercase text-[#f4b018]">
+    <section id="contact" className="py-20 px-4 text-white relative overflow-hidden">
+      {/* Background Animation Elements */}
+
+      <div className="max-w-5xl mx-auto w-full relative z-10">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-16 text-center">
           Let's Work Together
         </h2>
 
-        <form className="space-y-5 flex flex-col items-center w-full">
-          {["Full Name", "Email", "Phone Number"].map((placeholder, idx) => (
-            <div key={idx} className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2">
-              <input
-                type={placeholder === "Email" ? "email" : placeholder === "Phone Number" ? "tel" : "text"}
-                placeholder={placeholder}
-                className="w-full px-4 py-3 rounded-md bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-              />
-            </div>
-          ))}
+        <div className="max-w-2xl mx-auto">
+          <form
+            ref={form}
+            onSubmit={sendEmail}
+            className="bg-[#001a24]/60 backdrop-blur-sm border border-[#003d52] rounded-3xl p-8 md:p-12 shadow-2xl space-y-8"
+          >
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              required
+              className="w-full px-6 py-4 rounded-2xl bg-[#000f15] text-white border-2 border-[#003d52] focus:outline-none focus:border-[#f4b018] focus:ring-4 focus:ring-[#f4b018]/20 text-lg placeholder-gray-500"
+            />
 
-          <div className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              className="w-full px-6 py-4 rounded-2xl bg-[#000f15] text-white border-2 border-[#003d52] focus:outline-none focus:border-[#f4b018] focus:ring-4 focus:ring-[#f4b018]/20 text-lg placeholder-gray-500"
+            />
+
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Phone Number"
+              className="w-full px-6 py-4 rounded-2xl bg-[#000f15] text-white border-2 border-[#003d52] focus:outline-none focus:border-[#f4b018] focus:ring-4 focus:ring-[#f4b018]/20 text-lg placeholder-gray-500"
+            />
+
             <textarea
+              name="title"
+              rows="6"
               placeholder="Message"
-              rows="4"
-              className="w-full px-4 py-3 rounded-md bg-[#1a1a1a] text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+              required
+              className="w-full px-6 py-4 rounded-2xl bg-[#000f15] text-white border-2 border-[#003d52] focus:outline-none focus:border-[#f4b018] focus:ring-4 focus:ring-[#f4b018]/20 text-lg placeholder-gray-500 resize-none"
             ></textarea>
-          </div>
 
-          <div className="w-full sm:w-5/6 md:w-3/4 lg:w-1/2">
             <button
               type="submit"
-              className="w-full bg-yellow-400 text-[#0c0c48] font-semibold px-6 py-3 rounded-full hover:bg-yellow-300 transition"
+              className="w-full bg-gradient-to-r from-[#f4b018] to-[#ffcc33] text-[#001a24] font-black text-xl px-8 py-5 rounded-2xl hover:from-[#ffcc33] hover:to-[#f4b018] transition-all duration-300 transform hover:scale-105 uppercase tracking-wide shadow-lg hover:shadow-[#f4b018]/30"
             >
               Submit
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </section>
   );

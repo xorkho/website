@@ -1,4 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
+const Counter = ({ end, duration = 2000 }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const incrementTime = Math.floor(duration / end);
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= end) clearInterval(timer);
+    }, incrementTime);
+    return () => clearInterval(timer);
+  }, [end, duration]);
+
+  return <>{count}+</>;
+};
 
 const Hero = () => {
   return (
@@ -9,7 +26,6 @@ const Hero = () => {
       {/* Headline Text */}
       <div className="text-center mt-10 relative">
         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold tracking-wide text-white leading-tight">
-
           Where Creativity{" "}
           <span className="relative inline-block text-[#f4b018]">
             Meets Results
@@ -35,26 +51,36 @@ const Hero = () => {
       <video
         className="w-full max-w-[1100px] rounded-3xl shadow-lg mb-12 mt-10"
         src="/intro.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
         controls
       />
 
       {/* Stats Section */}
-<div className="bg-white text-[#002c3f] backdrop-blur-sm p-4 rounded-full shadow-md hover:scale-[1.02] transition-transform w-full max-w-4xl mx-auto">
+      <div className="bg-white text-[#002c3f] backdrop-blur-sm p-4 rounded-full shadow-md hover:scale-[1.02] transition-transform w-full max-w-4xl mx-auto">
         <div className="grid grid-cols-3 gap-2 text-center">
           <div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-1">100+</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-1">
+              <Counter end={100} />
+            </h3>
             <p className="text-xsm md:text-base font-semibold">
               Completed Projects
             </p>
           </div>
           <div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-1">50+</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-1">
+              <Counter end={50} />
+            </h3>
             <p className="text-xsm md:text-base font-semibold">
               Active Clients
             </p>
           </div>
           <div>
-            <h3 className="text-3xl md:text-4xl font-bold mb-1">100%</h3>
+            <h3 className="text-3xl md:text-4xl font-bold mb-1">
+              <Counter end={100} />
+            </h3>
             <p className="text-sm md:text-base font-semibold">
               Satisfaction Rate
             </p>

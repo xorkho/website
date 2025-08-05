@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 // Posters
 import Arshad from "../../assets/posters/ARSHAD.png";
@@ -22,17 +23,22 @@ const posters = [
 ];
 
 export default function PosterCarousel() {
-  const [selectedPoster, setSelectedPoster] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div className="w-full max-w-7xl mx-auto mt-24 mb-15 py-16 px-4 relative">
-      <h2 className="text-3xl md:text-5xl font-extrabold  uppercase mb-10 text-center  text-[#f4b018]">
-        Creative Poster Design
+    <div className="w-full max-w-7xl mx-auto mt-24 py-16 px-4 relative overflow-visible">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl capitalize font-bold text-center mb-12 text-[#ffffff]">
+        Creative Design
       </h2>
 
       <Swiper
-        spaceBetween={15}
-        navigation
+        spaceBetween={70}
+        loop={true}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        navigation={{
+          prevEl: ".custom-swiper-button-prev",
+          nextEl: ".custom-swiper-button-next",
+        }}
         modules={[Navigation]}
         breakpoints={{
           0: { slidesPerView: 1.1 },
@@ -40,47 +46,41 @@ export default function PosterCarousel() {
           768: { slidesPerView: 2.3 },
           1024: { slidesPerView: 3 },
         }}
-        className="rounded-3xl"
+        className="px-10"
+        centeredSlides={true} // IMPORTANT: Ensures the center slide is actually in the center
       >
-        {posters.map((poster) => (
-          <SwiperSlide key={poster.id}>
-            <div
-              onClick={() => setSelectedPoster(poster.src)}
-              className={`rounded-xl overflow-hidden shadow-2xl transition-all duration-300 cursor-pointer flex justify-center ${
-                selectedPoster
-                  ? selectedPoster === poster.src
-                    ? "scale-100 blur-0 z-10"
-                    : "scale-90 blur-sm opacity-40"
-                  : "hover:scale-110 hover:shadow-yellow-500"
-              }`}
-            >
-              <div className="w-full aspect-[5/4] max-h-[400px]">
-                <img
-                  src={poster.src}
-                  alt={`Poster ${poster.id}`}
-                  className="w-full h-full object-cover object-top rounded-xl"
-                />
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        {posters.map((poster, index) => {
+          const isCenterSlide = index === activeIndex;
 
-      {/* Fullscreen Modal */}
-      {selectedPoster && (
-        <div
-          onClick={() => setSelectedPoster(null)}
-          className="fixed inset-0 bg-black bg-opacity-90 backdrop-blur-sm flex items-center justify-center z-[9999] cursor-zoom-out"
-        >
-          <div className="max-h-[90%] overflow-y-auto p-4">
-            <img
-              src={selectedPoster}
-              alt="Expanded Poster"
-              className="max-w-[90vw] max-h-full object-contain rounded-xl mx-auto"
-            />
-          </div>
+          return (
+            <SwiperSlide key={poster.id}>
+              <div
+                className={`rounded-xl overflow-hidden transition-all duration-300 cursor-pointer flex justify-center ${
+                  isCenterSlide
+                    ? "scale-125 opacity-100 shadow-[0_8px_40px_rgba(255,255,255,0.3)]"
+                    : "opacity-50 hover:scale-105"
+                }`}
+              >
+                <div className="w-full aspect-[5/4] max-h-[400px]">
+                  <img
+                    src={poster.src}
+                    alt={`Poster ${poster.id}`}
+                    className="w-full h-full object-cover object-top rounded-xl"
+                  />
+                </div>
+              </div>
+            </SwiperSlide>
+          );
+        })}
+
+        {/* Custom Navigation Arrows */}
+        <div className="custom-swiper-button-prev absolute left-2 top-1/2 -translate-y-1/2 z-50 bg-[#f4b018] p-4 rounded-full text-white text-2xl cursor-pointer shadow-xl hover:scale-110 transition">
+          <FaChevronLeft />
         </div>
-      )}
+        <div className="custom-swiper-button-next absolute right-2 top-1/2 -translate-y-1/2 z-50 bg-[#f4b018] p-4 rounded-full text-white text-2xl cursor-pointer shadow-xl hover:scale-110 transition">
+          <FaChevronRight />
+        </div>
+      </Swiper>
     </div>
   );
 }

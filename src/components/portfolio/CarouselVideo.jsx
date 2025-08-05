@@ -70,7 +70,9 @@ function Reel({ src, onClick, isActive, currentVideoRef }) {
         playsInline
         controls={false}
         preload="auto"
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-cover rounded-4xl ${
+          isActive ? "scale-[1.15]" : "scale-[0.85]"
+        } transition-all duration-300 ease-in-out`}
       />
 
       <div className="absolute bottom-4 left-4 flex gap-2">
@@ -149,7 +151,7 @@ export default function CarouselVideo() {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 mt-[-40px]">
-      <h2 className="text-5xl font-extrabold tracking-tight uppercase text-center mb-12  text-[#f4b018] drop-shadow-md">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl capitalize font-bold text-center mb-12 text-[#ffffff]">
         Creative Video Highlights
       </h2>
 
@@ -181,7 +183,6 @@ export default function CarouselVideo() {
           <SwiperSlide
             key={index}
             className="!w-[250px] sm:!w-[280px] md:!w-[320px] xl:!w-[360px]"
-
           >
             <Reel
               src={video.src}
