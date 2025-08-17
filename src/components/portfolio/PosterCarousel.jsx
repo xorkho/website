@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaTimes } from "react-icons/fa";
 
 // Posters
 import Arshad from "../../assets/posters/ARSHAD.png";
@@ -14,16 +14,17 @@ import Nazminaz from "../../assets/posters/Nazminaz.gif";
 import RoyalEstate from "../../assets/posters/ROYAL ESTATE.png";
 
 const posters = [
-  { id: 1, src: Arshad },
-  { id: 2, src: ChkZilla },
-  { id: 3, src: Clinic },
-  { id: 4, src: Discover },
-  { id: 5, src: Nazminaz },
-  { id: 6, src: RoyalEstate },
+  { id: 1, src: Arshad, alt: "Arshad Poster Design" },
+  { id: 2, src: ChkZilla, alt: "ChkZilla Food Poster" },
+  { id: 3, src: Clinic, alt: "Clinic Healthcare Poster" },
+  { id: 4, src: Discover, alt: "Discover Travel Poster" },
+  { id: 5, src: Nazminaz, alt: "Nazminaz Fashion Poster" },
+  { id: 6, src: RoyalEstate, alt: "Royal Estate Real Estate Poster" },
 ];
 
 export default function PosterCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedPoster, setSelectedPoster] = useState(null);
 
   return (
     <div className="w-full max-w-7xl mx-auto mt-24 py-16 px-4 relative overflow-visible">
@@ -47,7 +48,7 @@ export default function PosterCarousel() {
           1024: { slidesPerView: 3 },
         }}
         className="px-10"
-        centeredSlides={true} // IMPORTANT: Ensures the center slide is actually in the center
+        centeredSlides={true}
       >
         {posters.map((poster, index) => {
           const isCenterSlide = index === activeIndex;
@@ -55,6 +56,7 @@ export default function PosterCarousel() {
           return (
             <SwiperSlide key={poster.id}>
               <div
+                onClick={() => setSelectedPoster(poster)} // 👈 Click pe modal open hoga
                 className={`rounded-xl overflow-hidden transition-all duration-300 cursor-pointer flex justify-center ${
                   isCenterSlide
                     ? "scale-125 opacity-100 shadow-[0_8px_40px_rgba(255,255,255,0.3)]"
@@ -64,7 +66,7 @@ export default function PosterCarousel() {
                 <div className="w-full aspect-[5/4] max-h-[400px]">
                   <img
                     src={poster.src}
-                    alt={`Poster ${poster.id}`}
+                    alt={poster.alt}
                     className="w-full h-full object-cover object-top rounded-xl"
                   />
                 </div>
@@ -81,6 +83,35 @@ export default function PosterCarousel() {
           <FaChevronRight />
         </div>
       </Swiper>
+
+{/* ✅ Modal */}
+{selectedPoster && (
+  <div
+    className="fixed inset-0 bg-black/80 z-[1000] flex items-center justify-center p-4"
+    onClick={() => setSelectedPoster(null)}
+  >
+    <div
+      className="relative w-full max-w-2xl max-h-[85vh] bg-black rounded-xl overflow-y-auto"
+      onClick={(e) => e.stopPropagation()} // backdrop click se close
+    >
+      {/* Close Button */}
+      <button
+        onClick={() => setSelectedPoster(null)}
+        className="absolute -top-10 right-0 text-white text-3xl hover:text-[#f4b018] transition"
+      >
+        <FaTimes />
+      </button>
+
+      {/* Image */}
+      <img
+        src={selectedPoster.src}
+        alt={selectedPoster.alt}
+        className="w-full h-auto object-contain rounded-xl"
+      />
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
