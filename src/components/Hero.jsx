@@ -14,7 +14,7 @@ const Counter = ({ end, duration = 2000 }) => {
     return () => clearInterval(timer);
   }, [end, duration]);
 
-  return <>{count}+</>;
+  return <>{count}</>;
 };
 
 const Hero = () => {
